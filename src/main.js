@@ -7,7 +7,7 @@ import './lib/mui/css/mui.min.css'
 // import MintUI from 'mint-ui'
 // import 'mint-ui/lib/style.css'
 // Vue.use(MintUI)  
-
+// git push origin master
 
 
 import 'mint-ui/lib/style.css'
