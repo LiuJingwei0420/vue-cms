@@ -8,6 +8,7 @@ import './lib/mui/css/mui.min.css'
 // import 'mint-ui/lib/style.css'
 // Vue.use(MintUI)  
 // git push origin master
+// 上面的是指令
 
 
 import 'mint-ui/lib/style.css'
