@@ -6,6 +6,11 @@ import VueRouter from 'vue-router'
 //1.2 安装路由
 Vue.use(VueRouter)
 
+// 2.1 导入 vue-resource
+import VueResource from 'vue-resource'
+// 2.2 安装 vue-resouce
+Vue.use(VueResource)
+
 
 //导入 MUI 的样式
 import './lib/mui/css/mui.min.css'
