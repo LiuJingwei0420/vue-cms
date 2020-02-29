@@ -1,40 +1,17 @@
 <template>
     <div>
         <ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-left" :src="ljw">
+				<li class="mui-table-view-cell mui-media" v-for="item in newslist" :key="item.id">
+					<router-link :to="'/home/newsinfo/' + item.id">
+						<img class="mui-media-object mui-pull-left" :src="item.img_url">
 						<div class="mui-media-body">
-							<h1>幸福</h1>
+							<h1>{{ item.title }}</h1>
 							<p class='mui-ellipsis'>
-                                <span>发表时间：2012-12-12 12:12:12</span>
-                                <span>点击: 0次</span>
+                                <span>发表时间：{{ item.add_time | dateFormat('YYYY-MM-DD') }}</span>
+                                <span>点击: {{item.click }}次</span>
                             </p>
 						</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-left" :src="ljw">
-						<div class="mui-media-body">
-							<h1>木屋</h1>
-							<p class='mui-ellipsis'> 
-                                <span>发表时间：2012-12-12 12:12:12</span>
-                                <span>点击: 0次</span></p>
-						</div>
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<a href="javascript:;">
-						<img class="mui-media-object mui-pull-left" :src="ljw">
-						<div class="mui-media-body">
-							<h1>CBD</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：2012-12-12 12:12:12</span>
-                                <span>点击: 0次</span>
-                            </p>
-						</div>
-					</a>
+					</router-link>
 				</li>
 
 			</ul>
@@ -42,10 +19,27 @@
 </template>
 
 <script>
+import {Toast} from "mint-ui"
 export default{
     data(){
         return {
-           ljw:'../../images/ljwcool.jpg'
+           ljw:'../../images/ljwcool.jpg',
+           newslist:[]// 新闻列表
+        }
+    },
+    created(){
+        this.getNewsList();
+    },
+    methods:{
+        getNewsList(){
+            this.$http.get('api/getnewslist').then(result => {
+                if(result.body.status === 0){
+                    //如果没有失败，应该把数据保存到data上
+                    this.newslist= result.body.message
+                }else{
+                    Toast('获取新闻列表失败！')
+                }
+            })
         }
     }
 }
